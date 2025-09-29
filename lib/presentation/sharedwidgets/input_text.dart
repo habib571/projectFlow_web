@@ -45,6 +45,7 @@ class InputText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+
       maxLines: maxLines,
       readOnly: readOnly,
       focusNode: focusNode,
@@ -57,13 +58,14 @@ class InputText extends StatelessWidget {
         suffixIcon: suffixIcon,
         prefixIcon: prefixIcon,
         filled: true,
-        fillColor: fillColor ?? Theme.of(context).inputDecorationTheme.fillColor,
+        fillColor: fillColor ?? Colors.white,
         hintText: hintText,
         hintStyle: Theme.of(context).inputDecorationTheme.hintStyle ,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
           borderSide: BorderSide(
-              color: AppColors.primaryGrey,
+            width: 1,
+              color: AppColors.primaryTxt,
               style: isBorder
                   ? BorderStyle.solid
                   : BorderStyle.none
@@ -72,7 +74,9 @@ class InputText extends StatelessWidget {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
           borderSide: BorderSide(
-              color: AppColors.primary400,
+            width: 2,
+              color: AppColors.primary500,
+
               style: isBorder
                   ? BorderStyle.solid
                   : BorderStyle.none
