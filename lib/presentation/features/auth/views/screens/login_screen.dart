@@ -1,9 +1,10 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:projectflow_web/core/helpers/extensions/screen_config_extension.dart';
 import 'package:projectflow_web/presentation/features/auth/views/widgets/login_description.dart';
 import 'package:projectflow_web/presentation/features/auth/views/widgets/login_form.dart';
 import 'package:projectflow_web/presentation/theme/colors.dart';
-
+@RoutePage()
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 

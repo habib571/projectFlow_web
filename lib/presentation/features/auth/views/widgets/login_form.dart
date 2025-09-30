@@ -57,7 +57,34 @@ class LoginForm extends StatelessWidget {
                   textStyle: sataoshiBold.copyWith(fontSize: 17, color: Colors.white),
                   buttonColor: AppColors.primary500,
                   text: "Login",
+                ) ,
+                const SizedBox(
+                  height: 30,
+                ),
+                Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Don't have an account?" ,
+                        style: sataoshiRegular.copyWith(fontSize: 16),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ) ,
+                      GestureDetector(
+                        onTap: () {
+
+                        },
+                        child: Text(
+                          "Sign up" ,
+                          style: sataoshiBold.copyWith(fontSize: 17 ,color: AppColors.primary500),
+                        ),
+                      )
+                    ],
+                  ),
                 )
+
               ],
             ),
           ),
