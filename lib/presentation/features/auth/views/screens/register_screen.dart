@@ -6,6 +6,8 @@ import 'package:projectflow_web/core/helpers/extensions/screen_config_extension.
 import 'package:projectflow_web/presentation/features/auth/bloc/auth_bloc.dart';
 import 'package:projectflow_web/presentation/features/auth/views/widgets/login_description.dart';
 import 'package:projectflow_web/presentation/features/auth/views/widgets/register_form.dart';
+import 'package:projectflow_web/presentation/sharedwidgets/custom_snackbar.dart';
+import 'package:projectflow_web/presentation/sharedwidgets/overlay_loader.dart';
 
 @RoutePage()
 class RegisterScreen extends StatelessWidget {
@@ -15,20 +17,39 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<AuthBloc>(),
-      child: Scaffold(
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 250.w, vertical: 150.h),
-          child: Row(
-            children: [
-              const Expanded(
-                child: LoginDescription(
-                    description: "TaskFlow helps teams work more efficiently with powerful project management tools."),
-              ),
-              SizedBox(width: 60.w),
-              const Expanded(child: RegisterForm())
-            ],
-          ),
+      child: BlocListener<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is RegisterLoadingState) {
+            OverLayLoader.showOverlay(context);
+          }
+          if (state is RegisterFailureState) {
+            OverLayLoader.dismissOverlay();
+            CustomSnackBar.showSnackBar(state.message);
+          }
+          if (state is RegisterSuccessState) {
+            OverLayLoader.dismissOverlay();
+            //  showOtpDialog(context, emailController.text.trim());
+          }
+        },
+        child: Scaffold(
+            body:_showBody()
         ),
+      ),
+    );
+  }
+
+  Widget _showBody() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 250.w, vertical: 150.h),
+      child: Row(
+        children: [
+          const Expanded(
+            child: LoginDescription(
+                description: "TaskFlow helps teams work more efficiently with powerful project management tools."),
+          ),
+          SizedBox(width: 60.w),
+           Expanded(child: RegisterForm())
+        ],
       ),
     );
   }
