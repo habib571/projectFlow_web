@@ -3,6 +3,11 @@ class Assets {
   Assets._();
 
   static const String iconsAlert = 'assets/icons/alert.png';
+  static const String iconsClock = 'assets/icons/clock.png';
+  static const String iconsDetail = 'assets/icons/detail.png';
+  static const String iconsFolder = 'assets/icons/folder.png';
+  static const String iconsKanban = 'assets/icons/kanban.png';
+  static const String iconsVerified = 'assets/icons/verified.png';
   static const String imagesLogo = 'assets/images/logo.svg';
 
 }
