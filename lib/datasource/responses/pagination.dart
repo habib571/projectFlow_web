@@ -15,6 +15,9 @@ class Pagination {
     required this.isLastPage,
   });
 
+
+
+
   factory Pagination.fromJson(Map<String, dynamic> json) {
     return Pagination(
       totalPages: json['totalPages'] ?? 0,
@@ -25,5 +28,5 @@ class Pagination {
       isLastPage: json['isLastPage'] ?? false,
     );
   }
-  
+
 }

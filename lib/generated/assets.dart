@@ -9,5 +9,6 @@ class Assets {
   static const String iconsKanban = 'assets/icons/kanban.png';
   static const String iconsVerified = 'assets/icons/verified.png';
   static const String imagesLogo = 'assets/images/logo.svg';
+  static const String jsonLoadingDots = 'assets/json/loading_dots.json';
 
 }

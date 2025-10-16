@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:projectflow_web/core/dependencyInjection/dependency_injector.dart';
 import 'package:projectflow_web/core/helpers/extensions/screen_config_extension.dart';
 import 'package:projectflow_web/presentation/features/auth/bloc/auth_bloc.dart';
@@ -9,7 +12,6 @@ import 'package:projectflow_web/presentation/features/auth/views/widgets/login_f
 import 'package:projectflow_web/presentation/sharedwidgets/custom_snackbar.dart';
 import 'package:projectflow_web/presentation/sharedwidgets/overlay_loader.dart';
 
-@RoutePage()
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
   @override
@@ -27,12 +29,10 @@ class LoginScreen extends StatelessWidget {
           }
           if (state is LoginSuccessState) {
             OverLayLoader.dismissOverlay();
-          //  showOtpDialog(context, emailController.text.trim());
+            context.push('/mainLayout');
           }
         },
-        child: Scaffold(
-            body:_showBody()
-        ),
+        child: Scaffold(body: _showBody()),
       ),
     );
   }
@@ -46,7 +46,7 @@ class LoginScreen extends StatelessWidget {
           const Expanded(
             child: LoginDescription(
               description:
-              "TaskFlow helps teams work more efficiently with powerful project management tools.",
+                  "TaskFlow helps teams work more efficiently with powerful project management tools.",
             ),
           ),
 
@@ -58,7 +58,6 @@ class LoginScreen extends StatelessWidget {
           ),
         ],
       ),
-
     );
   }
 }

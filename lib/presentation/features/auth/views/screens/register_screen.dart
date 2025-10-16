@@ -1,6 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:projectflow_web/core/dependencyInjection/dependency_injector.dart';
 import 'package:projectflow_web/core/helpers/extensions/screen_config_extension.dart';
 import 'package:projectflow_web/presentation/features/auth/bloc/auth_bloc.dart';
@@ -9,7 +10,6 @@ import 'package:projectflow_web/presentation/features/auth/views/widgets/registe
 import 'package:projectflow_web/presentation/sharedwidgets/custom_snackbar.dart';
 import 'package:projectflow_web/presentation/sharedwidgets/overlay_loader.dart';
 
-@RoutePage()
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
 
@@ -28,7 +28,7 @@ class RegisterScreen extends StatelessWidget {
           }
           if (state is RegisterSuccessState) {
             OverLayLoader.dismissOverlay();
-            //  showOtpDialog(context, emailController.text.trim());
+            context.push('/mainLayout');
           }
         },
         child: Scaffold(

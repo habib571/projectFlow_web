@@ -11,3 +11,10 @@ final class CreateProjectEvent extends ProjectEvent {
   List<Object?> get props => [projectModel] ;
 
 }
+final class GetProjectsEvent extends ProjectEvent {
+  final PaginationRequest pagination;
+  const GetProjectsEvent(this.pagination);
+
+  @override
+  List<Object?> get props => [pagination];
+}

@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
+import 'package:projectflow_web/core/dependencyInjection/dependency_injector.dart';
 import 'package:projectflow_web/core/helpers/extensions/screen_config_extension.dart';
+import 'package:projectflow_web/domain/models/project_model.dart';
+import 'package:projectflow_web/generated/assets.dart';
+import 'package:projectflow_web/presentation/features/projects/bloc/project_bloc.dart';
 import 'package:projectflow_web/presentation/sharedwidgets/custom_button.dart';
 import 'package:projectflow_web/presentation/sharedwidgets/input_text.dart';
 import 'package:projectflow_web/presentation/theme/colors.dart';
@@ -13,13 +19,15 @@ Future<void> showCreateProjectDialog(BuildContext context) async {
     context: context,
     barrierDismissible: false,
     builder: (context) {
-      return Dialog(
+      return BlocProvider(
+  create: (context) =>  getIt.get<ProjectBloc>() ,
+  child: Dialog(
         backgroundColor: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
         child: SizedBox(
-          width: 500.w,
+          width: 600.w,
           child: Padding(
             padding: const EdgeInsets.all(24),
             child: Column(
@@ -64,44 +72,65 @@ Future<void> showCreateProjectDialog(BuildContext context) async {
                 const SizedBox(height: 24),
 
                 // Buttons
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      width: 120.w,
-                      child: CustomButton(
-                        buttonColor: AppColors.primaryGrey,
-                        onPressed: () => Navigator.pop(context),
-                        text: "Cancel",
-                        textStyle: sataoshiBold.copyWith(
-                          color: Colors.white,
-                          fontSize: 16,
+                BlocConsumer<ProjectBloc, ProjectState>(
+                  listener: (context, state) {
+                   if(state is CreateProjectSuccess) {
+                     Navigator.pop(context);
+                   }
+
+                  },
+                  builder: (context, state) {
+                    if(state is CreateProjectLoading) {
+                      return Center(
+                        child: Lottie.asset(Assets.jsonLoadingDots , height: 150 , width: 200),
+                      );
+                    } else if(state is CreateProjectFailure) {
+                      return Text(state.failure.message ,style: sataoshiRegular.copyWith(fontSize: 13 ,color: Colors.redAccent),);
+                    }
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        SizedBox(
+                          width: 120,
+                          child: CustomButton(
+                            buttonColor: AppColors.primaryGrey,
+                            onPressed: () => Navigator.pop(context),
+                            text: "Cancel",
+                            textStyle: sataoshiBold.copyWith(
+                              color: Colors.white,
+                              fontSize: 16,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    SizedBox(
-                      width: 130.w,
-                      child: CustomButton(
-                        buttonColor: AppColors.primary500,
-                        onPressed: () {
-                          // handle create project logic
-                          Navigator.pop(context);
-                        },
-                        text: "Create Project",
-                        textStyle: sataoshiBold.copyWith(
-                          color: Colors.white,
-                          fontSize: 16,
+                        const SizedBox(width: 12),
+                        SizedBox(
+                          width: 150,
+                          child: CustomButton(
+                            buttonColor: AppColors.primary500,
+                            onPressed: () {
+                              context.read<ProjectBloc>().add(
+                                  CreateProjectEvent(
+                                      ProjectModel.request(title: nameController.text, description: descriptionController.text)
+                                  )
+                              ) ;
+                            },
+                            text: "Create Project",
+                            textStyle: sataoshiBold.copyWith(
+                              color: Colors.white,
+                              fontSize: 16,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ],
+                      ],
+                    );
+                  },
                 ),
               ],
             ),
           ),
         ),
-      );
+      ),
+);
     },
   );
 }

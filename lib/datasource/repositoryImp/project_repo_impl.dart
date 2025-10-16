@@ -5,6 +5,7 @@ import 'package:projectflow_web/core/api/error_handler.dart';
 import 'package:projectflow_web/core/api/failure.dart';
 import 'package:projectflow_web/core/network/internet_checker.dart';
 import 'package:projectflow_web/datasource/remotedatasource/project_remote_data_source.dart';
+import 'package:projectflow_web/datasource/requests/pagination_request.dart';
 import 'package:projectflow_web/datasource/responses/projects_response.dart';
 import 'package:projectflow_web/domain/models/project_model.dart';
 import 'package:projectflow_web/domain/repository/project_repository.dart';
@@ -33,10 +34,24 @@ class ProjectRepositoryImpl implements ProjectRepository {
   }
 
   @override
-  Future<Either<Failure, ProjectsResponse>> getMyProjects() {
-    // TODO: implement getMyProjects
-    throw UnimplementedError();
+  Future<Either<Failure, ProjectsResponse>> getMyProjects(PaginationRequest pagination) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response = await _projectDataSource.getProjects(pagination);
+        if (response.statusCode == 200) {
+          return Right(ProjectsResponse.fromJson(response.data));
+        } else {
+          return Left(Failure.fromJson(response.data));
+        }
+      } catch (error) {
+        log("errrorr:$error");
+        return Left(ErrorHandler
+            .handle(error)
+            .failure);
+      }
+    }
+    return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+  }
   }
 
 
-}

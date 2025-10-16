@@ -1,10 +1,12 @@
 import 'package:projectflow_web/core/api/api_client.dart';
 import 'package:projectflow_web/core/api/api_response.dart';
+import 'package:projectflow_web/datasource/requests/pagination_request.dart';
+import 'package:projectflow_web/datasource/responses/pagination.dart';
 import 'package:projectflow_web/domain/models/project_model.dart';
 
 abstract class ProjectDataSource {
   Future<ApiResponse> addProject( ProjectModel request );
-  Future<ApiResponse> getProjects() ;
+  Future<ApiResponse> getProjects(PaginationRequest pagination) ;
   /*Future<ApiResponse> getProjectMember(int projectId) ;
   Future<ApiResponse> getMemberByName(String name ,int page , int size) ;
   Future<ApiResponse> addMember(ProjectMember request) ;
@@ -24,17 +26,28 @@ class ProjectDataSourceImpl implements ProjectDataSource {
     return await _apiClient.execute(
         body: request.toJson(),
         method: Method.post,
-        url: "/api/reservations/create",
+        url: "/project/add-project",
         onRequestResponse: (response, statusCode) {
           return ApiResponse(response, statusCode);
         });
   }
 
   @override
-  Future<ApiResponse> getProjects() {
-    // TODO: implement getProjects
-    throw UnimplementedError();
-  }
+  Future<ApiResponse> getProjects(PaginationRequest pagination) async {
+    final queryParams = {
+      'page': pagination.page?.toString(),
+      'size': pagination.size?.toString()
+    };
 
+    final queryString = Uri(queryParameters: queryParams).query;
+
+    return await _apiClient.execute(
+      method: Method.post,
+      url: "/project/my_projects?$queryString",
+      onRequestResponse: (response, statusCode) {
+        return ApiResponse(response, statusCode);
+      },
+    );
+  }
 
 }

@@ -31,7 +31,6 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: AppColors.scaffold,
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary500),
         useMaterial3: true,
-
       ),
       builder: (context, child) {
         final appContext = getIt.get<AppContext>();
