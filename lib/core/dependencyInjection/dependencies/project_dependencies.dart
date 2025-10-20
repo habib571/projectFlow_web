@@ -11,7 +11,7 @@ class ProjectDependencies {
            () => ProjectDataSourceImpl(getIt()));
    getIt.registerLazySingleton<ProjectRepository>(
            () => ProjectRepositoryImpl(getIt(), getIt()));
-   getIt.registerFactory<ProjectBloc>(
+   getIt.registerLazySingleton<ProjectBloc>(
            () => ProjectBloc(getIt()));
  }
 }

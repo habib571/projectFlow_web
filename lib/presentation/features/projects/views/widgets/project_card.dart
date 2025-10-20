@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:projectflow_web/domain/models/project_model.dart';
 import 'package:projectflow_web/generated/assets.dart';
 import 'package:projectflow_web/presentation/sharedwidgets/custom_button.dart';
@@ -9,11 +10,14 @@ import 'package:skeletonizer/skeletonizer.dart';
 class ProjectCard extends StatelessWidget {
   final ProjectModel project;
   final bool isLoading;
+  final Function() onDetailsTap ;
+  final Function() onBoardTap ;
+
 
   const ProjectCard({
     super.key,
     required this.project,
-    this.isLoading = false,
+    this.isLoading = false, required this.onDetailsTap, required this.onBoardTap,
   });
 
   @override
@@ -65,7 +69,9 @@ class ProjectCard extends StatelessWidget {
                       buttonColor: Colors.white,
                       enableBorderSide: true,
                       borderSideColor: AppColors.primary500,
-                      onPressed: () {},
+                      onPressed: () {
+                        onBoardTap();
+                      },
                       text: "Board",
                       textStyle: sataoshiMedium.copyWith(color: AppColors.primary500),
                     ),
@@ -79,7 +85,9 @@ class ProjectCard extends StatelessWidget {
                         color: Colors.white,
                       ),
                       buttonColor: AppColors.primary500,
-                      onPressed: () {},
+                      onPressed: () {
+                        onDetailsTap();
+                      },
                       text: "Details",
                       textStyle: sataoshiMedium.copyWith(color: Colors.white),
                     ),

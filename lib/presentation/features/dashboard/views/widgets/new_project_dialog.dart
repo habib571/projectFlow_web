@@ -14,6 +14,7 @@ import 'package:projectflow_web/presentation/theme/styles.dart';
 Future<void> showCreateProjectDialog(BuildContext context) async {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
+  final  TextEditingController dateController = TextEditingController() ;
 
   await showDialog(
     context: context,
@@ -70,6 +71,22 @@ Future<void> showCreateProjectDialog(BuildContext context) async {
                   maxLines: 5,
                 ),
                 const SizedBox(height: 24),
+                Text('Due Date',
+                    style: sataoshiBold.copyWith(fontSize: 16)),
+                const SizedBox(height: 8),
+
+                Builder(
+                  builder: (context) {
+                    return InputText(
+                      readOnly: true,
+                      controller: dateController ,
+                      suffixIcon:const  Icon(Icons.calendar_month_outlined),
+                      onTap: () async {
+                        await pickProjectEndDate(context , dateController);
+                      },
+                    );
+                  }
+                ),
 
                 // Buttons
                 BlocConsumer<ProjectBloc, ProjectState>(
@@ -133,4 +150,20 @@ Future<void> showCreateProjectDialog(BuildContext context) async {
 );
     },
   );
+}
+
+String? selectedDate;
+
+pickProjectEndDate(BuildContext context , TextEditingController dateController) async {
+  DateTime? pickedDate = await showDatePicker(
+    context: context,
+    initialDate: DateTime.now(),
+    firstDate: DateTime(2000),
+    lastDate: DateTime(2100),
+  );
+  if (pickedDate != null) {
+    selectedDate = pickedDate.toString();
+    dateController.text =
+    "${pickedDate.day.toString().padLeft(2, '0')}-${pickedDate.month.toString().padLeft(2, '0')}-${pickedDate.year}";
+  }
 }

@@ -7,6 +7,7 @@ class ProjectModel extends Equatable {
   final String? description;
   final String? dueDate;
   final double? progress;
+  final String? createdAt ;
   final UserModel? createdBy; // made nullable
 
   const ProjectModel({
@@ -15,6 +16,7 @@ class ProjectModel extends Equatable {
     this.description,
     this.dueDate,
     this.progress,
+    this.createdAt,
     this.createdBy,
   });
 
@@ -24,14 +26,16 @@ class ProjectModel extends Equatable {
   })  : id = null,
         dueDate = null,
         progress = null,
-        createdBy = null;
+        createdBy = null,
+        createdAt = null ;
 
   factory ProjectModel.fromJson(Map<String, dynamic> json) => ProjectModel(
     id: json['id'] as int?,
-    title: json['title'] as String?,
+    title: json['name'] as String?,
     description: json['description'] as String?,
     dueDate: json['dueDate'] as String?,
     progress: (json['progress'] as num?)?.toDouble(),
+    createdAt: json["startDate"],
     createdBy: json['createdBy'] != null
         ? UserModel.fromJson(json['createdBy'])
         : null,

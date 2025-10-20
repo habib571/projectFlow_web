@@ -29,7 +29,7 @@ class LoginScreen extends StatelessWidget {
           }
           if (state is LoginSuccessState) {
             OverLayLoader.dismissOverlay();
-            context.push('/mainLayout');
+            context.go('/dashboard');
           }
         },
         child: Scaffold(body: _showBody()),

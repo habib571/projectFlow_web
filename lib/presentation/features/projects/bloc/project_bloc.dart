@@ -16,6 +16,12 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
     on<GetProjectsEvent>(_getProjects);
 
   }
+  ProjectModel? _projectModel ;
+  ProjectModel? get projectModel => _projectModel ;
+
+  setProjectModel(ProjectModel? projectModel) {
+    _projectModel = projectModel ;
+  }
   _createProject(CreateProjectEvent event , Emitter emit)async {
     emit(CreateProjectLoading());
     (await _projectRepository.addProject(event.projectModel)).fold(

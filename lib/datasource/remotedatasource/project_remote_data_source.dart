@@ -42,7 +42,7 @@ class ProjectDataSourceImpl implements ProjectDataSource {
     final queryString = Uri(queryParameters: queryParams).query;
 
     return await _apiClient.execute(
-      method: Method.post,
+      method: Method.get,
       url: "/project/my_projects?$queryString",
       onRequestResponse: (response, statusCode) {
         return ApiResponse(response, statusCode);

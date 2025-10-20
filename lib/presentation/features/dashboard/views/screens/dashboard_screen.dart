@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:projectflow_web/core/helpers/extensions/screen_config_extension.dart';
+import 'package:projectflow_web/core/routes/app_routes.dart';
 import 'package:projectflow_web/presentation/features/auth/views/screens/login_screen.dart';
 import 'package:projectflow_web/presentation/features/dashboard/bloc/navigation_bloc.dart';
 import 'package:projectflow_web/presentation/features/dashboard/views/widgets/dashboard_header.dart';
@@ -23,16 +25,12 @@ class DashboardScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Builder(builder: (context) {
-              return DashboardHeader(
-                // onPressed: () => showCreateProjectDialog(context)
-                onPressed: () {
-                  context
-                      .read<NavigationBloc>()
-                      .add(const NavigationItemSelected(1));
-                },
-              );
-            }),
+            DashboardHeader(
+              onPressed: () {
+                context.go('/projects') ;
+
+              },
+            ),
             const SizedBox(
               height: 30,
             ),
