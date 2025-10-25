@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:projectflow_web/presentation/features/projects/views/screens/invite_member_screen.dart';
-import 'package:projectflow_web/presentation/features/projects/views/widgets/members_section.dart';
+import 'package:projectflow_web/presentation/features/projects/views/widgets/member/members_section.dart';
 
 
 class MembersTabRouter extends StatefulWidget {
@@ -29,7 +29,7 @@ class _MembersTabRouterState extends State<MembersTabRouter> {
         ),
         GoRoute(
           path: '/invite',
-          builder: (context, state) =>  InviteMemberScreen(),
+          builder: (context, state) =>  const InviteMemberScreen(),
         ),
       ],
     );

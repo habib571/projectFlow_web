@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projectflow_web/domain/models/project_model.dart';
-import 'package:projectflow_web/presentation/features/projects/views/widgets/project_details_card.dart';
-import 'package:projectflow_web/presentation/features/projects/views/widgets/recent_activity_section.dart';
+import 'package:projectflow_web/presentation/features/projects/views/widgets/project/project_details_card.dart';
+import 'package:projectflow_web/presentation/features/projects/views/widgets/project/recent_activity_section.dart';
 
 class ProjectOverview extends StatelessWidget {
   const ProjectOverview({super.key, required this.project});

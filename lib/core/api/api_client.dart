@@ -20,8 +20,8 @@ class ApiClient {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
-      connectTimeout: const Duration(seconds: 60),
-      receiveTimeout: const Duration(seconds: 60),
+      connectTimeout: const Duration(seconds: 10),
+      receiveTimeout: const Duration(seconds: 10),
       validateStatus: (status) => status != null && status <= 500,
     ),
   ) {
@@ -30,7 +30,7 @@ class ApiClient {
 
   Future<void> _init() async {
     await getToken();
-    _dio.interceptors.add(
+  /*  _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) {
           log('[REQUEST] ${options.method} ${options.baseUrl}${options.path}');
@@ -52,7 +52,7 @@ class ApiClient {
           return handler.next(e);
         },
       ),
-    );
+    );*/
   }
 
   Future<void> getToken() async {
@@ -127,7 +127,6 @@ class ApiClient {
         break;
     }
 
-    // ✅ Fix for Flutter Web: decode IdentityMap into Map<String, dynamic>
     dynamic jsonResult = response.data;
     if (jsonResult is! Map && jsonResult is! List) {
       try {

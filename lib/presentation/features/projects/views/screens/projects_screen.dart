@@ -8,8 +8,8 @@ import 'package:projectflow_web/core/helpers/extensions/screen_config_extension.
 import 'package:projectflow_web/datasource/requests/pagination_request.dart';
 import 'package:projectflow_web/domain/models/project_model.dart';
 import 'package:projectflow_web/presentation/features/projects/bloc/project_bloc.dart';
-import 'package:projectflow_web/presentation/features/projects/views/widgets/project_card.dart';
-import 'package:projectflow_web/presentation/features/projects/views/widgets/project_header.dart';
+import 'package:projectflow_web/presentation/features/projects/views/widgets/project/project_card.dart';
+import 'package:projectflow_web/presentation/features/projects/views/widgets/project/project_header.dart';
 import 'package:projectflow_web/presentation/utils/responsive.dart';
 
 class ProjectsScreen extends StatefulWidget {

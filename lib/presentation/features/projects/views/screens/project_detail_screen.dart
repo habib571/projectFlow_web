@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projectflow_web/core/helpers/extensions/screen_config_extension.dart';
 import 'package:projectflow_web/core/routes/member_tab_router.dart';
 import 'package:projectflow_web/presentation/features/projects/bloc/project_bloc.dart';
-import 'package:projectflow_web/presentation/features/projects/views/widgets/project_details_header.dart';
-import 'package:projectflow_web/presentation/features/projects/views/widgets/project_overview.dart';
+import 'package:projectflow_web/presentation/features/projects/views/widgets/project/project_details_header.dart';
+import 'package:projectflow_web/presentation/features/projects/views/widgets/project/project_overview.dart';
 import 'package:projectflow_web/presentation/theme/colors.dart';
 
 class ProjectDetailScreen extends StatefulWidget {

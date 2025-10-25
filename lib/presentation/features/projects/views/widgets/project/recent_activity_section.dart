@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projectflow_web/presentation/features/projects/views/widgets/recent_activity_card.dart';
+import 'package:projectflow_web/presentation/features/projects/views/widgets/project/recent_activity_card.dart';
 import 'package:projectflow_web/presentation/theme/styles.dart';
 
 class RecentActivitySection extends StatelessWidget {
