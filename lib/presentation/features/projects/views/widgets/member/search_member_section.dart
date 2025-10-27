@@ -109,7 +109,6 @@ class _SearchMemberSectionState extends State<SearchMemberSection> {
                   },
                 );
               }
-
               return const SizedBox(); // Default idle state
             },
           ),

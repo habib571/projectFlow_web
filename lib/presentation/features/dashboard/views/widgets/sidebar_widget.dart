@@ -9,6 +9,7 @@ import 'package:projectflow_web/presentation/features/dashboard/bloc/navigation_
 import 'package:projectflow_web/presentation/features/dashboard/views/screens/dashboard_screen.dart';
 import 'package:projectflow_web/presentation/features/projects/bloc/project_bloc.dart';
 import 'package:projectflow_web/presentation/features/projects/views/screens/projects_screen.dart';
+import 'package:projectflow_web/presentation/features/tasks/bloc/task_bloc.dart';
 import 'package:projectflow_web/presentation/theme/colors.dart';
 
 class MainLayout extends StatelessWidget {
@@ -24,6 +25,9 @@ class MainLayout extends StatelessWidget {
         BlocProvider<ProjectBloc>(
           create: (context) => getIt<ProjectBloc>(),
         ),
+        BlocProvider<TaskBloc>(
+          create: (context) => getIt<TaskBloc>(),
+        ),
       ],
       child: Scaffold(
         body: Row(
@@ -34,46 +38,39 @@ class MainLayout extends StatelessWidget {
                 final bloc = context.read<NavigationBloc>();
                 List<CollapsibleItem> items = [
                   CollapsibleItem(
-                    isSelected: bloc.state is ItemSelectedState &&
-                        (bloc.state as ItemSelectedState).selectedIndex == 0,
-                    text: 'Home',
-                    icon: Icons.home,
-                    onPressed: () => context.go('/dashboard')
-                  ),
+                      isSelected: bloc.state is ItemSelectedState &&
+                          (bloc.state as ItemSelectedState).selectedIndex == 0,
+                      text: 'Home',
+                      icon: Icons.home,
+                      onPressed: () => context.go('/dashboard')),
                   CollapsibleItem(
-                    isSelected: bloc.state is ItemSelectedState &&
-                        (bloc.state as ItemSelectedState).selectedIndex == 1,
-                    text: 'Profile',
-                    icon: Icons.person,
-                      onPressed: () => context.go('/projects')
-
-                  ),
+                      isSelected: bloc.state is ItemSelectedState &&
+                          (bloc.state as ItemSelectedState).selectedIndex == 1,
+                      text: 'Profile',
+                      icon: Icons.person,
+                      onPressed: () => context.go('/projects')),
                   CollapsibleItem(
-                    isSelected: bloc.state is ItemSelectedState &&
-                        (bloc.state as ItemSelectedState).selectedIndex == 2,
-                    text: 'Settings',
-                    icon: Icons.settings,
-                      onPressed: () => context.go('/settings')
-
-                  ),
+                      isSelected: bloc.state is ItemSelectedState &&
+                          (bloc.state as ItemSelectedState).selectedIndex == 2,
+                      text: 'Settings',
+                      icon: Icons.settings,
+                      onPressed: () => context.go('/settings')),
                 ];
                 return Padding(
                   padding: EdgeInsets.symmetric(vertical: 50.h),
                   child: CollapsibleSidebar(
                     showToggleButton: false,
                     collapseOnBodyTap: false,
-                    //   avatarImg: Image.asset(Assets.iconsAlert),
                     isCollapsed: MediaQuery.of(context).size.width <= 800,
                     items: items,
                     title: 'Project Flow',
                     body: Center(
                       child: ConstrainedBox(
-                        constraints: BoxConstraints(
-                            maxWidth: MediaQuery.of(context).size.width - 100),
-                        child: child
-                      ),
+                          constraints: BoxConstraints(
+                              maxWidth:
+                                  MediaQuery.of(context).size.width - 100),
+                          child: child),
                     ),
-
                     backgroundColor: AppColors.scaffold,
                     titleStyle:
                         const TextStyle(color: Colors.white, fontSize: 20),

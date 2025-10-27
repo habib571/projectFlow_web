@@ -99,7 +99,9 @@ class ApiClient {
     required ApiResponse Function(dynamic result, int statusCode)
     onRequestResponse,
   }) async {
+    final stopwatch = Stopwatch()..start();
     await getToken();
+    log("Token loading: ${stopwatch.elapsedMilliseconds} ms");
 
     Options options = Options(
       headers: isTokenRequired

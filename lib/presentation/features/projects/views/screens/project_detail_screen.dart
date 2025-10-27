@@ -5,6 +5,8 @@ import 'package:projectflow_web/core/routes/member_tab_router.dart';
 import 'package:projectflow_web/presentation/features/projects/bloc/project_bloc.dart';
 import 'package:projectflow_web/presentation/features/projects/views/widgets/project/project_details_header.dart';
 import 'package:projectflow_web/presentation/features/projects/views/widgets/project/project_overview.dart';
+import 'package:projectflow_web/presentation/features/tasks/views/screens/tasks_screen.dart';
+import 'package:projectflow_web/presentation/features/tasks/views/widgets/new_task_dialog.dart';
 import 'package:projectflow_web/presentation/theme/colors.dart';
 
 class ProjectDetailScreen extends StatefulWidget {
@@ -22,6 +24,7 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen>
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
+    context.read<ProjectBloc>().add(GetMembersEvent());
   }
 
   @override
@@ -95,7 +98,6 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen>
                 ),
               ),
             ),
-            // --- Placeholder for Tab Content ---
             Expanded(
               child: TabBarView(
                 controller: _tabController,
@@ -104,8 +106,12 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen>
                     return ProjectOverview(
                         project: context.read<ProjectBloc>().projectModel!);
                   }),
-                  const MembersTabRouter() ,
-                  const Center(child: Text('Tasks content goes here')),
+                  const MembersTabRouter(),
+                  TasksScreen(
+                    onInviteTap: () {
+                      showCreateTaskDialog(context , context.read<ProjectBloc>().members!);
+                    },
+                  )
                 ],
               ),
             ),

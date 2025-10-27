@@ -121,6 +121,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
 
         return ProjectCard(project: project, isLoading: isLoading ,onDetailsTap: (){
           context.read<ProjectBloc>().setProjectModel(project);
+          // context.read<ProjectBloc>().members!.clear() ;
           context.go('/projects/details');
 
         } ,onBoardTap: (){},) ;

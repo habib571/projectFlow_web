@@ -25,7 +25,7 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
   }
   ProjectModel? _projectModel;
   ProjectModel? get projectModel => _projectModel;
-
+  List<MemberModel>? members ;
   UserModel? _user;
   UserModel? get user => _user;
   int currentStep = 0;
@@ -80,12 +80,18 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
 
   Future<void> _getMembers(
       GetMembersEvent event, Emitter<ProjectState> emit) async {
+    if(members != null && members!.isNotEmpty) {
+      members!.clear() ;
+    }
     emit(GetMemberLoading());
     final result =
         await _projectRepository.getProjectMembers(projectModel!.id!);
     result.fold(
       (failure) => emit(GetMemberFailure(failure)),
-      (members) => emit(GetMemberSuccess(members)),
+      (members) {
+        emit(GetMemberSuccess(members)) ;
+        this.members = members ;
+      }
     );
   }
 

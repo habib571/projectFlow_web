@@ -5,6 +5,7 @@ import 'package:projectflow_web/core/cache/hive_local_storage.dart';
 import 'package:projectflow_web/core/cache/local_storage.dart';
 import 'package:projectflow_web/core/dependencyInjection/dependencies/auth_dependencies.dart';
 import 'package:projectflow_web/core/dependencyInjection/dependencies/project_dependencies.dart';
+import 'package:projectflow_web/core/dependencyInjection/dependencies/task_dependencies.dart';
 import 'package:projectflow_web/core/network/internet_checker.dart';
 import 'package:projectflow_web/presentation/features/dashboard/bloc/navigation_bloc.dart';
 import 'package:projectflow_web/presentation/utils/app_context.dart';
@@ -19,4 +20,5 @@ void configureDependencies() {
   getIt.registerLazySingleton(()=>NavigationBloc()) ;
   AuthDependency.init();
   ProjectDependencies.init();
+  TaskDependencies.init();
 }
