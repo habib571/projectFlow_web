@@ -35,7 +35,6 @@ Future<void> showCreateProjectDialog(BuildContext context) async {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Header row
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -50,8 +49,6 @@ Future<void> showCreateProjectDialog(BuildContext context) async {
                   ],
                 ),
                 const SizedBox(height: 20),
-
-                // Project Name
                 Text('Project Name',
                     style: sataoshiBold.copyWith(fontSize: 16)),
                 const SizedBox(height: 8),
@@ -74,7 +71,6 @@ Future<void> showCreateProjectDialog(BuildContext context) async {
                 Text('Due Date',
                     style: sataoshiBold.copyWith(fontSize: 16)),
                 const SizedBox(height: 8),
-
                 Builder(
                   builder: (context) {
                     return InputText(
@@ -87,8 +83,6 @@ Future<void> showCreateProjectDialog(BuildContext context) async {
                     );
                   }
                 ),
-
-                // Buttons
                 BlocConsumer<ProjectBloc, ProjectState>(
                   listener: (context, state) {
                    if(state is CreateProjectSuccess) {

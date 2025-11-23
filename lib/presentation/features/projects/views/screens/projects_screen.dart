@@ -10,6 +10,7 @@ import 'package:projectflow_web/domain/models/project_model.dart';
 import 'package:projectflow_web/presentation/features/projects/bloc/project_bloc.dart';
 import 'package:projectflow_web/presentation/features/projects/views/widgets/project/project_card.dart';
 import 'package:projectflow_web/presentation/features/projects/views/widgets/project/project_header.dart';
+import 'package:projectflow_web/presentation/theme/colors.dart';
 import 'package:projectflow_web/presentation/utils/responsive.dart';
 
 class ProjectsScreen extends StatefulWidget {
@@ -30,14 +31,14 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
     _projectBloc.add(GetProjectsEvent(PaginationRequest(currentPage, 4)));
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.only(
-          left: MediaQuery.of(context).size.width <= 800 ? 40.w : 250.w,
+          left: 40.w,
           right: 40.w,
+          top: 40.h,
           bottom: 40.h,
         ),
         child: Column(
@@ -77,6 +78,9 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
                         ),
                         const SizedBox(height: 30),
                         NumberPagination(
+                          buttonRadius: 180,
+                          selectedButtonColor: AppColors.primary500,
+
                           totalPages: totalPages,
                           currentPage: currentPage + 1,
                           onPageChanged: (page) {

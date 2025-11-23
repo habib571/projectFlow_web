@@ -5,19 +5,16 @@ import 'package:projectflow_web/presentation/features/projects/views/widgets/pro
 
 class ProjectOverview extends StatelessWidget {
   const ProjectOverview({super.key, required this.project});
-final ProjectModel project ;
+  final ProjectModel project;
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ProjectDetailsCard(project: project) ,
-        const SizedBox(height: 20) ,
+        ProjectDetailsCard(project: project),
+        const SizedBox(height: 20),
         const RecentActivitySection()
-
-
-
       ],
-    ) ;
+    );
   }
 }

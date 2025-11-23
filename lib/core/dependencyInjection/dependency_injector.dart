@@ -4,6 +4,7 @@ import 'package:projectflow_web/core/api/api_client.dart';
 import 'package:projectflow_web/core/cache/hive_local_storage.dart';
 import 'package:projectflow_web/core/cache/local_storage.dart';
 import 'package:projectflow_web/core/dependencyInjection/dependencies/auth_dependencies.dart';
+import 'package:projectflow_web/core/dependencyInjection/dependencies/meeting_dependencies.dart';
 import 'package:projectflow_web/core/dependencyInjection/dependencies/project_dependencies.dart';
 import 'package:projectflow_web/core/dependencyInjection/dependencies/task_dependencies.dart';
 import 'package:projectflow_web/core/network/internet_checker.dart';
@@ -21,4 +22,5 @@ void configureDependencies() {
   AuthDependency.init();
   ProjectDependencies.init();
   TaskDependencies.init();
+  MeetingDependencies.init();
 }

@@ -96,7 +96,7 @@ class ImagePlaceHolderWeb extends StatelessWidget {
       child: Text(
         letter,
         style: TextStyle(
-          fontSize: radius * 0.4,
+          fontSize: radius * 0.7,
           fontWeight: FontWeight.bold,
           color: Colors.white,
         ),

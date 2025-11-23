@@ -4,18 +4,25 @@ import 'package:projectflow_web/presentation/sharedwidgets/image_placeholder.dar
 import 'package:projectflow_web/presentation/theme/styles.dart';
 
 class SelectMemberWidget extends StatefulWidget {
-   const SelectMemberWidget({super.key, required this.members});
-  final List<MemberModel> members ;
+  const SelectMemberWidget({
+    super.key,
+    required this.members,
+    required this.onMemberSelected,
+  });
+
+  final List<MemberModel> members;
+  final ValueChanged<MemberModel?> onMemberSelected;
 
   @override
   State<SelectMemberWidget> createState() => _SelectMemberWidgetState();
 }
 
 class _SelectMemberWidgetState extends State<SelectMemberWidget> {
-   MemberModel? selectedMember  ;
+  MemberModel? selectedMember;
+
   @override
   Widget build(BuildContext context) {
-    return   DropdownButton<MemberModel>(
+    return DropdownButton<MemberModel>(
       hint: const Text('Select user'),
       value: selectedMember,
       icon: const Icon(Icons.arrow_drop_down),
@@ -24,9 +31,12 @@ class _SelectMemberWidgetState extends State<SelectMemberWidget> {
           value: user,
           child: Row(
             children: [
-            ImagePlaceHolderWeb(radius: 15, fullName: user.user!.fullName!) ,
+              ImagePlaceHolderWeb(radius: 15, fullName: user.user!.fullName!),
               const SizedBox(width: 8),
-              Text(user.user!.fullName! ,style: sataoshiRegular.copyWith(fontSize: 14,)),
+              Text(
+                user.user!.fullName!,
+                style: sataoshiRegular.copyWith(fontSize: 14),
+              ),
             ],
           ),
         );
@@ -35,9 +45,10 @@ class _SelectMemberWidgetState extends State<SelectMemberWidget> {
         setState(() {
           selectedMember = newUser;
         });
+        widget.onMemberSelected(newUser);
       },
       selectedItemBuilder: (context) {
-          return widget.members.map((user) {
+        return widget.members.map((user) {
           return Row(
             children: [
               const Icon(Icons.check_circle, color: Colors.green),
@@ -51,6 +62,5 @@ class _SelectMemberWidgetState extends State<SelectMemberWidget> {
         }).toList();
       },
     );
-
   }
 }

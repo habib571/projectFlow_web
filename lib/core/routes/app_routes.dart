@@ -8,6 +8,8 @@ import 'package:projectflow_web/presentation/features/dashboard/views/screens/da
 import 'package:projectflow_web/presentation/features/dashboard/views/widgets/sidebar_widget.dart';
 import 'package:projectflow_web/presentation/features/projects/views/screens/project_detail_screen.dart';
 import 'package:projectflow_web/presentation/features/projects/views/screens/projects_screen.dart';
+import 'package:projectflow_web/presentation/features/tasks/views/screens/kanban_board_screen.dart';
+import 'package:projectflow_web/presentation/features/tasks/views/screens/test_kanban.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: '/login',
@@ -16,13 +18,12 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/login',
       builder: (context, state) => const LoginScreen(),
-   /*   redirect: (context, state) {
-        final token = getIt
-            .get<LocalStorage>()
-            .load(key: "token", boxName: "userData");
-        if (token != null) return '/dashboard';
-        return null;
-      },*/
+     redirect: (context, state)  async {
+       final localStorage = getIt.get<LocalStorage>();
+       final token = await localStorage.load(key: "token", boxName: "userData");
+       if (token != null) return '/dashboard';
+       return null;
+      },
     ),
     GoRoute(
       path: '/register',
@@ -30,7 +31,6 @@ final GoRouter router = GoRouter(
     ),
 
     ShellRoute(
-
       builder: (context, state, child) {
         return MainLayout(child: child);
       },
@@ -63,6 +63,13 @@ final GoRouter router = GoRouter(
           builder: (context, state) =>
           const Center(child: Text("⚙️ Settings Screen")),
         ),
+        GoRoute(
+          path: '/kanban',
+          builder: (context, state) {
+            return  const KanbanBoard() ;
+          },
+        ),
+
       ],
     ),
   ],

@@ -4,13 +4,17 @@ class Assets {
 
   static const String iconsAccessibility = 'assets/icons/accessibility.png';
   static const String iconsAlert = 'assets/icons/alert.png';
+  static const String iconsCalendar = 'assets/icons/calendar.png';
   static const String iconsClock = 'assets/icons/clock.png';
+  static const String iconsDashboard  = 'assets/icons/dashboard (2).png';
   static const String iconsDelete = 'assets/icons/delete.png';
   static const String iconsDetail = 'assets/icons/detail.png';
   static const String iconsEdit = 'assets/icons/edit.png';
   static const String iconsFolder = 'assets/icons/folder.png';
+  static const String iconsFolderDot = 'assets/icons/folder-dot.png';
   static const String iconsKanban = 'assets/icons/kanban.png';
   static const String iconsVerified = 'assets/icons/verified.png';
+  static const String iconsVideo = 'assets/icons/video.png';
   static const String imagesLogo = 'assets/images/logo.svg';
   static const String jsonLoadingDots = 'assets/json/loading_dots.json';
 

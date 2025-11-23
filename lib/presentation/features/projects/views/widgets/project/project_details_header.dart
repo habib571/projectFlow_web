@@ -39,7 +39,7 @@ class ProjectDetailsHeader extends StatelessWidget {
                 const SizedBox(width: 10,) ,
                 isManager ? _deleteButton() : const SizedBox.shrink() ,
                 const SizedBox(width: 10,) ,
-                _kanbanButton()
+                _kanbanButton(context)
 
               ],
 
@@ -87,7 +87,7 @@ class ProjectDetailsHeader extends StatelessWidget {
 
   }
 
-  Widget _kanbanButton() {
+  Widget _kanbanButton(BuildContext context) {
     return
     SizedBox(
       width: 170,
@@ -99,7 +99,7 @@ class ProjectDetailsHeader extends StatelessWidget {
         ),
         buttonColor: AppColors.primary500,
         onPressed: () {
-         // context.go('/projects/details');
+          context.go('/kanban');
         },
         text: "Kanban Board",
         textStyle: sataoshiMedium.copyWith(color: Colors.white),
