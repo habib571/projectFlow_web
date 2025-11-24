@@ -38,11 +38,11 @@ class MainLayout extends StatelessWidget {
             return Row(
               children: [
                 Container(
-                  width: 250.w,
+                  width: 270.w,
                   color: Colors.white,
                   child: Padding(
                     padding:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                     EdgeInsets.symmetric(vertical: 20, horizontal: 20.w),
                     child: Column(
                       children: [
                         // Logo

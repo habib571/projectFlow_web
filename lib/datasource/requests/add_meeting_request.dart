@@ -6,8 +6,10 @@ class AddMeetingRequest {
   final int projectId ;
   final String? startDateTime ;
   final List<int> participantsIds ;
+  final double duration ;
 
   AddMeetingRequest( {
+   required this.duration,
     required this.title,
     this.type,
     required this.projectId,
@@ -21,6 +23,7 @@ class AddMeetingRequest {
       "projectId" :projectId ,
       'startDateTime': startDateTime,
       'participantIds': participantsIds,
+       'duration': duration
     };
   }
 }

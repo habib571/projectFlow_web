@@ -121,7 +121,7 @@ Future<void> showCreateProjectDialog(BuildContext context) async {
                             onPressed: () {
                               context.read<ProjectBloc>().add(
                                   CreateProjectEvent(
-                                      ProjectModel.request(title: nameController.text, description: descriptionController.text)
+                                      ProjectModel.request(title: nameController.text, description: descriptionController.text ,dueDate: dateController.text)
                                   )
                               ) ;
                             },

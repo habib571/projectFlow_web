@@ -17,9 +17,9 @@ class DashboardScreen extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.only(
-          left: MediaQuery.of(context).size.width <= 800 ? 40.w : 200.w,
-          right: 40.w,
-          //   top: 40.h,
+          left: 60.w ,
+          right: 60.w,
+            top: 40.h,
           bottom: 40.h,
         ),
         child: Column(

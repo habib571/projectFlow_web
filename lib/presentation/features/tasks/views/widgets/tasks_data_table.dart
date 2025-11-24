@@ -7,6 +7,8 @@ import 'package:projectflow_web/presentation/features/tasks/views/widgets/task_p
 import 'package:projectflow_web/presentation/sharedwidgets/image_placeholder.dart';
 import 'package:projectflow_web/presentation/theme/styles.dart';
 
+import '../../../../theme/colors.dart';
+
 class TasksDataTable extends StatefulWidget {
   const TasksDataTable({super.key});
 
@@ -40,69 +42,84 @@ class _TasksDataTableState extends State<TasksDataTable> {
           final currentPage = state.response.pagination.currentPage;
           return Column(
             children: [
-              DataTable(
-                columns: [
-                  DataColumn(
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 40),
+                width: double.infinity,
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: AppColors.primaryGrey),
+                  color: Colors.white,
+                ),
+                child: DataTable(
+                  headingRowHeight: 55,
+                  dataRowHeight: 68,
+                  horizontalMargin: 24,
+                  columnSpacing: 60,
+                  dividerThickness: 0.4,
+                  columns: [
+                    DataColumn(
+                        label: Text(
+                      "Task",
+                      style: sataoshiBold.copyWith(fontSize: 17),
+                    )),
+                    DataColumn(
                       label: Text(
-                    "Task",
-                    style: sataoshiBold.copyWith(fontSize: 17),
-                  )),
-                  DataColumn(
-                    label: Text(
-                      "Priority",
-                      style: sataoshiBold.copyWith(fontSize: 17),
+                        "Priority",
+                        style: sataoshiBold.copyWith(fontSize: 17),
+                      ),
                     ),
-                  ),
-                  DataColumn(
-                    label: Text(
-                      "Status",
-                      style: sataoshiBold.copyWith(fontSize: 17),
+                    DataColumn(
+                      label: Text(
+                        "Status",
+                        style: sataoshiBold.copyWith(fontSize: 17),
+                      ),
                     ),
-                  ),
-                  DataColumn(
-                    label: Text(
-                      "Assignee",
-                      style: sataoshiBold.copyWith(fontSize: 17),
+                    DataColumn(
+                      label: Text(
+                        "Assignee",
+                        style: sataoshiBold.copyWith(fontSize: 17),
+                      ),
                     ),
-                  ),
-                  DataColumn(
-                    label: Text(
-                      "Deadline",
-                      style: sataoshiBold.copyWith(fontSize: 17),
-                    ),
-                  )
-                ],
-                rows: tasks.map((task) {
-                  return DataRow(cells: [
-                    DataCell(Text(
-                      task.name!,
-                      style: sataoshiRegular.copyWith(fontSize: 15),
-                    )),
-                    DataCell(TaskPriorityCard(
-                      taskPriorityModel: TaskPriorityModel.type(task.priority!),
-                    )),
-                    DataCell(TaskPriorityCard(
-                      taskPriorityModel: TaskPriorityModel.type(task.status!),
-                    )),
-                    DataCell(Row(
-                      children: [
-                        ImagePlaceHolderWeb(
-                            radius: 10,
-                            fullName: task.assignedUser!.fullName!,
-                            imageUrl: task.assignedUser!.imageUrl),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          task.assignedUser!.fullName!,
-                          style: sataoshiRegular.copyWith(fontSize: 15),
-                        )
-                      ],
-                    )) ,
-                    DataCell(Text(task.deadline! ,style: sataoshiRegular.copyWith(fontSize: 15 ,color: Colors.redAccent),) )
+                    DataColumn(
+                      label: Text(
+                        "Deadline",
+                        style: sataoshiBold.copyWith(fontSize: 17),
+                      ),
+                    )
+                  ],
+                  rows: tasks.map((task) {
+                    return DataRow(cells: [
+                      DataCell(Text(
+                        task.name!,
+                        style: sataoshiRegular.copyWith(fontSize: 15),
+                      )),
+                      DataCell(TaskPriorityCard(
+                        taskPriorityModel: TaskPriorityModel.type(task.priority!),
+                      )),
+                      DataCell(TaskPriorityCard(
+                        taskPriorityModel: TaskPriorityModel.type(task.status!),
+                      )),
+                      DataCell(Row(
+                        children: [
+                          ImagePlaceHolderWeb(
+                              radius: 10,
+                              fullName: task.assignedUser!.fullName!,
+                              imageUrl: task.assignedUser!.imageUrl),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            task.assignedUser!.fullName!,
+                            style: sataoshiRegular.copyWith(fontSize: 15),
+                          )
+                        ],
+                      )) ,
+                      DataCell(Text(task.deadline! ,style: sataoshiRegular.copyWith(fontSize: 15 ,color: Colors.redAccent),) )
 
-                  ]);
-                }).toList(),
+                    ]);
+                  }).toList(),
+                ),
               ),
               const SizedBox(
                 height: 30,

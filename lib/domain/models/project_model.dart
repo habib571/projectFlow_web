@@ -23,8 +23,8 @@ class ProjectModel extends Equatable {
   const ProjectModel.request({
     required this.title,
     required this.description,
+    required this.dueDate,
   })  : id = null,
-        dueDate = null,
         progress = null,
         createdBy = null,
         createdAt = null ;
@@ -42,8 +42,9 @@ class ProjectModel extends Equatable {
   );
 
   Map<String, dynamic> toJson() => {
-    'title': title,
+    'name': title,
     'description': description,
+    'endDate': dueDate,
   };
 
   @override

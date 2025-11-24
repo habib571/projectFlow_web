@@ -30,7 +30,7 @@ class ProjectDataSourceImpl implements ProjectDataSource {
     return await _apiClient.execute(
         body: request.toJson(),
         method: Method.post,
-        url: "/project/add-project",
+        url: "/project/add_project",
         onRequestResponse: (response, statusCode) {
           return ApiResponse(response, statusCode);
         });

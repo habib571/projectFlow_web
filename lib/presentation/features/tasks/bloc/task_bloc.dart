@@ -29,7 +29,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       emit(PrioritySelected(selectedIndex: selectedIndex));
     }
   _createTask(CreateTaskEvent event, Emitter emit) async {
-    emit(CreateProjectLoading());
+    emit(CreateTaskLoading());
     (await _taskRepository.addTask(event.request , _projectBloc.projectModel!.id!)).fold((failure) {
       emit(CreateTaskFailure(failure));
     }, (taskModel) {
