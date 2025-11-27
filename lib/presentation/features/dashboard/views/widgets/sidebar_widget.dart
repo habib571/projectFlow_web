@@ -6,12 +6,13 @@ import 'package:projectflow_web/core/dependencyInjection/dependency_injector.dar
 import 'package:projectflow_web/core/helpers/extensions/screen_config_extension.dart';
 import 'package:projectflow_web/generated/assets.dart';
 import 'package:projectflow_web/presentation/features/dashboard/bloc/navigation_bloc.dart';
-import 'package:projectflow_web/presentation/features/meetings/bloc/meeting_bloc.dart';
 import 'package:projectflow_web/presentation/features/projects/bloc/project_bloc.dart';
 import 'package:projectflow_web/presentation/features/tasks/bloc/task_bloc.dart';
 import 'package:projectflow_web/presentation/sharedwidgets/image_placeholder.dart';
 import 'package:projectflow_web/presentation/theme/colors.dart';
 import 'package:projectflow_web/presentation/theme/styles.dart';
+
+import '../../../meetings/meetingbloc/meeting_bloc.dart';
 
 class MainLayout extends StatelessWidget {
   const MainLayout({super.key, required this.child});

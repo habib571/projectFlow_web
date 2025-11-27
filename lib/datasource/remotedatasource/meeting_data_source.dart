@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:projectflow_web/core/api/api_client.dart';
 import 'package:projectflow_web/core/api/api_response.dart';
 import 'package:projectflow_web/datasource/requests/add_meeting_request.dart';
@@ -16,10 +18,11 @@ class MeetingDataSourceImpl implements MeetingDataSource {
 
   @override
   Future<ApiResponse> addMeeting(AddMeetingRequest request, int projectId) async {
+    log(request.toJson().toString()) ;
     return await _apiClient.execute(
       body: request.toJson(),
       method: Method.post,
-      url: "/meeting/add-meeting/$projectId",
+      url: "/meeting",
       onRequestResponse: (response, statusCode) {
         return ApiResponse(response, statusCode);
       },

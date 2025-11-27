@@ -3,6 +3,8 @@ import 'package:projectflow_web/presentation/sharedwidgets/custom_button.dart';
 import 'package:projectflow_web/presentation/theme/colors.dart';
 import 'package:projectflow_web/presentation/theme/styles.dart';
 
+import 'add_meeting_dialog.dart';
+
 class MeetingsHeader extends StatelessWidget {
   const MeetingsHeader({super.key});
 
@@ -25,7 +27,7 @@ class MeetingsHeader extends StatelessWidget {
             ),
             buttonColor: AppColors.primary500,
             onPressed: () {
-            //  showCreateProjectDialog(context);
+            showCreateMeetingDialog(context);
             },
             text: "New Project",
             textStyle: sataoshiBold.copyWith(color: Colors.white, fontSize: 16),

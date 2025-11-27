@@ -60,6 +60,9 @@ dependencies:
   dotted_border: ^2.1.0
   aatex_board: ^0.0.4+2
   drag_and_drop_lists: ^0.4.2
+  textfield_tags: ^3.0.1
+  flutter_webrtc: ^1.2.1
+  web_socket_channel: ^3.0.3
 
 
 dev_dependencies:
@@ -94,6 +97,7 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/json/
+
 
   fonts:
     - family: Satoshi

@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:number_pagination/number_pagination.dart';
 import 'package:projectflow_web/domain/models/meeting.dart';
-import 'package:projectflow_web/presentation/features/meetings/bloc/meeting_bloc.dart';
 import 'package:projectflow_web/presentation/features/meetings/view/widgets/meeting_card.dart';
 import 'package:projectflow_web/presentation/features/meetings/view/widgets/meetings_header.dart';
 import 'package:projectflow_web/presentation/theme/colors.dart';
 import 'package:projectflow_web/datasource/requests/pagination_request.dart';
+
+import '../../meetingbloc/meeting_bloc.dart';
 
 class MeetingsScreen extends StatefulWidget {
   const MeetingsScreen({super.key});

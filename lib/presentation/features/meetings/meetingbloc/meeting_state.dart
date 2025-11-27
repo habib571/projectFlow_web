@@ -53,3 +53,32 @@ final class GetMeetingsFailure extends MeetingState {
   @override
   List<Object?> get props => [failure];
 }
+final class SearchMembersLoading extends MeetingState {
+  @override
+  List<Object?> get props => [];
+}
+
+final class SearchMembersSuccess extends MeetingState {
+  final List<MemberModel> users;
+  const SearchMembersSuccess(this.users);
+
+  @override
+  List<Object?> get props => [users];
+}
+
+final class SearchMembersFailure extends MeetingState {
+  final Failure failure;
+  const SearchMembersFailure(this.failure);
+
+  @override
+  List<Object?> get props => [failure];
+}
+
+class ParticipantsState extends MeetingState {
+  final List<MemberModel> selected;
+
+  const ParticipantsState(this.selected);
+
+  @override
+  List<Object?> get props => [selected];
+}

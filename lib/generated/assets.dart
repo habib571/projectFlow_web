@@ -2,11 +2,43 @@
 class Assets {
   Assets._();
 
+  static const String apiApiClient = 'lib/core/api/api_client.dart';
+  static const String apiApiResponse = 'lib/core/api/api_response.dart';
+  static const String apiErrorHandler = 'lib/core/api/error_handler.dart';
+  static const String apiFailure = 'lib/core/api/failure.dart';
+  static const String blocAuthBloc = 'lib/presentation/features/auth/meetingbloc/auth_bloc.dart';
+  static const String blocAuthEvent = 'lib/presentation/features/auth/meetingbloc/auth_event.dart';
+  static const String blocAuthState = 'lib/presentation/features/auth/meetingbloc/auth_state.dart';
+  static const String blocDashboardBloc = 'lib/presentation/features/dashboard/meetingbloc/dashboard_bloc.dart';
+  static const String blocDashboardEvent = 'lib/presentation/features/dashboard/meetingbloc/dashboard_event.dart';
+  static const String blocDashboardState = 'lib/presentation/features/dashboard/meetingbloc/dashboard_state.dart';
+  static const String blocMeetingBloc = 'lib/presentation/features/meetings/meetingbloc/meeting_bloc.dart';
+  static const String blocMeetingEvent = 'lib/presentation/features/meetings/meetingbloc/meeting_event.dart';
+  static const String blocMeetingState = 'lib/presentation/features/meetings/meetingbloc/meeting_state.dart';
+  static const String blocNavigationBloc = 'lib/presentation/features/dashboard/meetingbloc/navigation_bloc.dart';
+  static const String blocNavigationEvent = 'lib/presentation/features/dashboard/meetingbloc/navigation_event.dart';
+  static const String blocNavigationState = 'lib/presentation/features/dashboard/meetingbloc/navigation_state.dart';
+  static const String blocProjectBloc = 'lib/presentation/features/projects/meetingbloc/project_bloc.dart';
+  static const String blocProjectEvent = 'lib/presentation/features/projects/meetingbloc/project_event.dart';
+  static const String blocProjectState = 'lib/presentation/features/projects/meetingbloc/project_state.dart';
+  static const String blocTaskBloc = 'lib/presentation/features/tasks/meetingbloc/task_bloc.dart';
+  static const String blocTaskEvent = 'lib/presentation/features/tasks/meetingbloc/task_event.dart';
+  static const String blocTaskState = 'lib/presentation/features/tasks/meetingbloc/task_state.dart';
+  static const String cacheHiveLocalStorage = 'lib/core/cache/hive_local_storage.dart';
+  static const String cacheLocalStorage = 'lib/core/cache/local_storage.dart';
+  static const String constantsEndpoints = 'lib/core/constants/endpoints.dart';
+  static const String dependenciesAuthDependencies = 'lib/core/dependencyInjection/dependencies/auth_dependencies.dart';
+  static const String dependenciesMeetingDependencies = 'lib/core/dependencyInjection/dependencies/meeting_dependencies.dart';
+  static const String dependenciesProjectDependencies = 'lib/core/dependencyInjection/dependencies/project_dependencies.dart';
+  static const String dependenciesTaskDependencies = 'lib/core/dependencyInjection/dependencies/task_dependencies.dart';
+  static const String dependencyInjectionDependencyInjector = 'lib/core/dependencyInjection/dependency_injector.dart';
+  static const String extensionsScreenConfigExtension = 'lib/core/helpers/extensions/screen_config_extension.dart';
+  static const String generatedAssets = 'lib/generated/assets.dart';
   static const String iconsAccessibility = 'assets/icons/accessibility.png';
   static const String iconsAlert = 'assets/icons/alert.png';
   static const String iconsCalendar = 'assets/icons/calendar.png';
   static const String iconsClock = 'assets/icons/clock.png';
-  static const String iconsDashboard  = 'assets/icons/dashboard (2).png';
+  static const String iconsDashboard = 'assets/icons/dashboard (2).png';
   static const String iconsDelete = 'assets/icons/delete.png';
   static const String iconsDetail = 'assets/icons/detail.png';
   static const String iconsEdit = 'assets/icons/edit.png';
@@ -17,5 +49,4 @@ class Assets {
   static const String iconsVideo = 'assets/icons/video.png';
   static const String imagesLogo = 'assets/images/logo.svg';
   static const String jsonLoadingDots = 'assets/json/loading_dots.json';
-
 }
