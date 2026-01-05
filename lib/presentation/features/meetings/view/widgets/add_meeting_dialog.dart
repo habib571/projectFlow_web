@@ -251,6 +251,7 @@ Future<void> showCreateMeetingDialog(BuildContext context) async {
                             child: CustomButton(
                               buttonColor: AppColors.primary500,
                               onPressed: () {
+                                log(getFinalDateTime().toString()) ;
                                 context.read<MeetingBloc>().add(
                                   AddMeetingEvent(
                                     AddMeetingRequest(
@@ -324,6 +325,7 @@ String? getFinalDateTime() {
       selectedTime!.hour,
       selectedTime!.minute,
     );
+    log(combined.toString()) ;
     return combined.toIso8601String().split('.')[0];
   }
   return null;

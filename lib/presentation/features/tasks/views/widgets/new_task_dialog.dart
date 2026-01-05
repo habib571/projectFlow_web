@@ -14,6 +14,8 @@ import 'package:projectflow_web/presentation/sharedwidgets/input_text.dart';
 import 'package:projectflow_web/presentation/theme/colors.dart';
 import 'package:projectflow_web/presentation/theme/styles.dart';
 
+import '../../../../../datasource/requests/pagination_request.dart';
+
 Future<void> showCreateTaskDialog(
     BuildContext context, List<MemberModel> members) async {
   final TextEditingController nameController = TextEditingController();
@@ -24,8 +26,8 @@ Future<void> showCreateTaskDialog(
     context: context,
     barrierDismissible: false,
     builder: (context) {
-      return BlocProvider(
-        create: (context) => getIt.get<TaskBloc>(),
+      return BlocProvider.value(
+        value:  getIt.get<TaskBloc>(),
         child: Dialog(
           backgroundColor: Colors.white,
           shape: RoundedRectangleBorder(
@@ -44,7 +46,7 @@ Future<void> showCreateTaskDialog(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Create New Project',
+                        'Create New Task',
                         style: sataoshiBold.copyWith(fontSize: 22),
                       ),
                       IconButton(
@@ -56,12 +58,12 @@ Future<void> showCreateTaskDialog(
                   const SizedBox(height: 20),
 
                   // Project Name
-                  Text('Project Name',
+                  Text('Task Name',
                       style: sataoshiBold.copyWith(fontSize: 16)),
                   const SizedBox(height: 8),
                   InputText(
                     controller: nameController,
-                    hintText: 'Enter project name',
+                    hintText: 'Enter Task name',
                   ),
                   const SizedBox(height: 16),
 
@@ -70,7 +72,7 @@ Future<void> showCreateTaskDialog(
                   const SizedBox(height: 8),
                   InputText(
                     controller: descriptionController,
-                    hintText: 'Enter project description',
+                    hintText: 'Enter Task description',
                     maxLines: 5,
                   ),
                   const SizedBox(height: 24),
@@ -86,6 +88,8 @@ Future<void> showCreateTaskDialog(
                                 style: sataoshiBold.copyWith(fontSize: 16)),
                             const SizedBox(height: 8),
                             BlocBuilder<TaskBloc, TaskState>(
+                              buildWhen: (previous, current) =>
+                                  current is PrioritySelected,
                               builder: (context, state) {
                                 final selectedIndex = state is PrioritySelected
                                     ? state.selectedIndex
@@ -147,6 +151,7 @@ Future<void> showCreateTaskDialog(
                   BlocConsumer<TaskBloc, TaskState>(
                     listener: (context, state) {
                       if (state is CreateTaskSuccess) {
+                        context.read<TaskBloc>().add(GetTasksEvent(PaginationRequest(0, 4)));
                         Navigator.pop(context);
                       }
                     },
@@ -196,7 +201,7 @@ Future<void> showCreateTaskDialog(
                                       selectedMember.user!.id!,
                                     )));
                               },
-                              text: "Create Project",
+                              text: "Create Task ",
                               textStyle: sataoshiBold.copyWith(
                                 color: Colors.white,
                                 fontSize: 16,

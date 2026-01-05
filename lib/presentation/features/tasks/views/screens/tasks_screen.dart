@@ -23,7 +23,7 @@ class TasksScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Project Members",
+                        "Project Tasks",
                         style: sataoshiBold.copyWith(fontSize: 18),
                       ),
                       SizedBox(
@@ -32,7 +32,7 @@ class TasksScreen extends StatelessWidget {
                           trailing: const Icon(Icons.add, color: Colors.white),
                           buttonColor: AppColors.primary500,
                           onPressed: onInviteTap!,
-                          text: "Invite Member",
+                          text: "Create Tasks",
                           textStyle:
                               sataoshiMedium.copyWith(color: Colors.white),
                         ),

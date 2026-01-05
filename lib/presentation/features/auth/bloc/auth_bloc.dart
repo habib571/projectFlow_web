@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:projectflow_web/core/cache/hive_local_storage.dart';
 import 'package:projectflow_web/core/cache/local_storage.dart';
 import 'package:projectflow_web/core/dependencyInjection/dependency_injector.dart';
+import 'package:projectflow_web/core/services/firebase_notification_service.dart';
 import 'package:projectflow_web/datasource/requests/auth_request.dart';
 import 'package:projectflow_web/domain/repository/auth_repository.dart';
 
@@ -44,9 +47,24 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           (failure) async {
         emit(RegisterFailureState(failure.message));
       },
-          (data) async {
+      (data) async {
         await _localStorage.save(
             key: "token", value: data.token, boxName: "userData");
+        
+        // Save FCM token to backend
+        try {
+          final fcmToken = await getIt<FirebaseNotificationService>().getToken();
+          if (fcmToken != null) {
+            final saveTokenResult = await _authRepository.saveDeviceToken(fcmToken);
+            saveTokenResult.fold(
+              (l) => log("Failed to save FCM token: ${l.message}"),
+              (r) => log("Device token registered: ${r.status}, ${r.message}"),
+            );
+          }
+        } catch (e) {
+          log("Failed to save FCM token: $e");
+        }
+        
         emit(RegisterSuccessState());
       },
     );

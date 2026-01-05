@@ -51,7 +51,7 @@ class _SelectMemberWidgetState extends State<SelectMemberWidget> {
         return widget.members.map((user) {
           return Row(
             children: [
-              const Icon(Icons.check_circle, color: Colors.green),
+              ImagePlaceHolderWeb(radius: 15, fullName: user.user!.fullName!) ,
               const SizedBox(width: 8),
               Text(
                 user.user!.fullName!,

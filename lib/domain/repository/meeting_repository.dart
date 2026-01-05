@@ -9,4 +9,5 @@ abstract class MeetingRepository {
   Future<Either<Failure, Meeting>> addMeeting(AddMeetingRequest request, int projectId);
   Future<Either<Failure, PaginatedListResponse<Meeting>>> getMeetings(
       PaginationRequest pagination, int projectId);
+  Future<Either<Failure, void>> endMeeting(int meetingId);
 }

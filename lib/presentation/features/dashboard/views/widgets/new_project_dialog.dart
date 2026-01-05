@@ -11,6 +11,8 @@ import 'package:projectflow_web/presentation/sharedwidgets/input_text.dart';
 import 'package:projectflow_web/presentation/theme/colors.dart';
 import 'package:projectflow_web/presentation/theme/styles.dart';
 
+import '../../../../../datasource/requests/pagination_request.dart';
+
 Future<void> showCreateProjectDialog(BuildContext context) async {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
@@ -20,8 +22,8 @@ Future<void> showCreateProjectDialog(BuildContext context) async {
     context: context,
     barrierDismissible: false,
     builder: (context) {
-      return BlocProvider(
-  create: (context) =>  getIt.get<ProjectBloc>() ,
+      return BlocProvider.value(
+  value:   getIt.get<ProjectBloc>() ,
   child: Dialog(
         backgroundColor: Colors.white,
         shape: RoundedRectangleBorder(
@@ -87,6 +89,7 @@ Future<void> showCreateProjectDialog(BuildContext context) async {
                   listener: (context, state) {
                    if(state is CreateProjectSuccess) {
                      Navigator.pop(context);
+                     context.read<ProjectBloc>().add(GetProjectsEvent(PaginationRequest(0, 4)));
                    }
 
                   },

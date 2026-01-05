@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
@@ -8,17 +10,21 @@ part 'video_call_event.dart';
 part 'video_call_state.dart';
 
 
+
+
 class VideoCallBloc extends Bloc<VideoCallEvent, VideoCallState> {
   final SignalingService signalingService;
+
 
   MediaStream? _localStream;
   final Map<int, RTCPeerConnection> _pcs = {};
   final Map<int, RTCVideoRenderer> _remoteRenderers = {};
 
-  int meetId = 1;
+  int meetId;
 
-  VideoCallBloc(this.signalingService)
-      : super(VideoCallState(
+  VideoCallBloc(this.signalingService, {int? meetingId,})
+      : meetId = meetingId ?? 1,
+        super(VideoCallState(
     loading: true,
     micOn: true,
     cameraOn: true,
@@ -41,7 +47,11 @@ class VideoCallBloc extends Bloc<VideoCallEvent, VideoCallState> {
     await state.localRenderer.initialize();
 
     _localStream = await navigator.mediaDevices.getUserMedia({
-      "audio": true,
+      "audio": {
+        "echoCancellation": true,
+        "noiseSuppression": true,
+        "autoGainControl": true,
+      },
       "video": {
         "facingMode": "user",
         "width": {"ideal": 1280},
@@ -59,6 +69,7 @@ class VideoCallBloc extends Bloc<VideoCallEvent, VideoCallState> {
       "type": "join",
       "meetId": meetId,
     });
+    log("meet id $meetId") ;
 
     emit(state.copyWith(loading: false));
   }
@@ -99,18 +110,32 @@ class VideoCallBloc extends Bloc<VideoCallEvent, VideoCallState> {
   }
 
   Future<void> _onEndCall(EndCall event, Emitter<VideoCallState> emit) async {
+    // Notify other peers that we're leaving
+    signalingService.send({
+      "type": "leave",
+      "meetId": meetId,
+    });
+    
+    // Call backend to end meeting
+
+
     for (final r in _remoteRenderers.values) {
       await r.dispose();
     }
+    _remoteRenderers.clear();
 
     for (final pc in _pcs.values) {
       await pc.close();
     }
+    _pcs.clear();
+
+    _localStream?.getTracks().forEach((t) => t.stop());
+    _localStream = null;
 
     await state.localRenderer.dispose();
     signalingService.close();
 
-    _localStream?.getTracks().forEach((t) => t.stop());
+    emit(state.copyWith(remoteTiles: []));
   }
 
   Future<void> _handleSignal(Map<String, dynamic> m) async {

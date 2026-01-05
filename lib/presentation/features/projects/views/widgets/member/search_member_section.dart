@@ -19,7 +19,7 @@ class _SearchMemberSectionState extends State<SearchMemberSection> {
   final TextEditingController searchController = TextEditingController();
   Timer? _debounce;
 
-  static const _debounceDuration = Duration(milliseconds: 7000);
+  static const _debounceDuration = Duration(milliseconds: 100);
 
   @override
   void dispose() {

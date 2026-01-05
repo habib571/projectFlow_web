@@ -46,10 +46,10 @@ class _KanbanBoardState extends State<KanbanBoard> {
         }
 
         return Padding(
-          padding: EdgeInsets.only(left: 500.w) ,
+          padding: EdgeInsets.only(left: 150.w ,top: 70.h) ,
           child: DragAndDropLists(
             axis: Axis.horizontal,
-            listWidth: 280,
+            listWidth: 350,
             listDraggingWidth: 300, // while dragging
             children: _lists,
             onItemReorder: _onItemReorder,

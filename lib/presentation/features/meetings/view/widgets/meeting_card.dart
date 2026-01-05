@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projectflow_web/core/helpers/video_call_window_helper.dart';
 import 'package:projectflow_web/domain/models/meeting.dart';
 import 'package:projectflow_web/presentation/features/meetings/view/widgets/overlapped_images.dart';
 import 'package:projectflow_web/presentation/theme/colors.dart';
@@ -24,7 +25,9 @@ class MeetingCard extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        onTap();
+        VideoCallWindowHelper.openVideoCallWindow(
+          meetingId: meeting.id ?? 0,
+        );
       },
       child: Skeletonizer(
         enabled: isLoading,
@@ -151,7 +154,32 @@ class MeetingCard extends StatelessWidget {
     if (meeting.status == MeetingStatus.ONGOING) {
       return "Live Now";
     } else if (meeting.status == MeetingStatus.CREATED) {
-      return "Starts in 15 mins";
+      if (meeting.startDateTime != null) {
+        try {
+          final start = DateTime.parse(meeting.startDateTime!);
+          final now = DateTime.now();
+          final difference = start.difference(now);
+
+          if (difference.isNegative) {
+            return "Starts soon";
+          }
+
+          if (difference.inDays > 0) {
+            return "Starts in ${difference.inDays} day${difference.inDays > 1 ? 's' : ''}";
+          } else if (difference.inHours > 0) {
+            final mins = difference.inMinutes % 60;
+            if (mins > 0) {
+              return "Starts in ${difference.inHours} hr $mins min";
+            }
+            return "Starts in ${difference.inHours} hr${difference.inHours > 1 ? 's' : ''}";
+          } else {
+            return "Starts in ${difference.inMinutes} min${difference.inMinutes > 1 ? 's' : ''}";
+          }
+        } catch (_) {
+          return "Starts soon";
+        }
+      }
+      return "Starts soon";
     } else if (meeting.status == MeetingStatus.ENDED) {
       return "Ended yesterday";
     }
@@ -161,7 +189,12 @@ class MeetingCard extends StatelessWidget {
   Widget _buildActionButton(bool isOngoing, bool isEnded) {
     if (isOngoing) {
       return ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          // Open video call in new popup window
+          VideoCallWindowHelper.openVideoCallWindow(
+            meetingId: meeting.id ?? 0,
+          );
+        },
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.blue,
           shape: RoundedRectangleBorder(

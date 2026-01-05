@@ -4,6 +4,7 @@ import 'package:projectflow_web/core/helpers/extensions/screen_config_extension.
 import 'package:projectflow_web/presentation/features/projects/bloc/project_bloc.dart';
 import 'package:projectflow_web/presentation/features/projects/views/widgets/member/add_member_widget.dart';
 import 'package:projectflow_web/presentation/features/projects/views/widgets/member/search_member_section.dart';
+import 'package:projectflow_web/presentation/theme/colors.dart';
 import 'package:step_progress/step_progress.dart';
 class InviteMemberScreen extends StatefulWidget {
   const InviteMemberScreen({super.key});
@@ -13,7 +14,7 @@ class InviteMemberScreen extends StatefulWidget {
 }
 
 class _InviteMemberScreenState extends State<InviteMemberScreen> {
-  final _stepProgressController = StepProgressController(totalSteps: 3);
+  final _stepProgressController = StepProgressController(totalSteps: 2);
   late  ProjectBloc bloc ;
 
   @override
@@ -35,8 +36,6 @@ class _InviteMemberScreenState extends State<InviteMemberScreen> {
         );
       case 1:
         return const AddMemberWidget();
-      case 2:
-        return const Text("Step 3: Confirm Invitation");
       default:
         return const Text("Something went wrong.");
     }
@@ -60,9 +59,15 @@ class _InviteMemberScreenState extends State<InviteMemberScreen> {
           child: Column(
             children: [
               StepProgress(
+                theme:  const StepProgressThemeData(
+                  defaultForegroundColor: AppColors.primary500 ,
+                  activeForegroundColor: AppColors.primary500 ,
+                  enableRippleEffect: true
+          ) ,
+
                 margin: EdgeInsets.symmetric(horizontal: 150.w, vertical: 40),
                 controller: _stepProgressController,
-                totalSteps: 3,
+                totalSteps: 2,
                 onStepChanged: (index)  {
                   bloc.add(ChangeStepEvent(index)) ;
 

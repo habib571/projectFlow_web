@@ -21,7 +21,7 @@ class AddMeetingRequest {
       'title': title,
       'type': type?.toString().split('.').last,
       "projectId" :projectId ,
-      'startDateTime': startDateTime,
+      'scheduledTime': startDateTime,
       'participantIds': participantsIds,
        'duration': duration
     };

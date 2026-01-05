@@ -57,5 +57,24 @@ class MeetingRepositoryImpl implements MeetingRepository {
       }
     }
     return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+  }
+
+  @override
+  Future<Either<Failure, void>> endMeeting(int meetingId) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response = await _meetingDataSource.endMeeting(meetingId);
+        if (response.statusCode == 200) {
+          return const Right(null);
+        } else {
+          return Left(Failure.fromJson(response.data));
+        }
+      } catch (error) {
+        log("Error ending meeting: $error");
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    }
+    return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
   }
 }

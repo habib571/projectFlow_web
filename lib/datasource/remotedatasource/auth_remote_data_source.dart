@@ -9,6 +9,7 @@ import 'package:projectflow_web/datasource/requests/auth_request.dart';
 abstract class AuthRemoteDataSource {
   Future<ApiResponse> signup(AuthRequest authRequest);
   Future<ApiResponse> login(AuthRequest authRequest);
+  Future<ApiResponse> saveDeviceToken(String token);
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -41,5 +42,15 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         });
   }
 
-
+  @override
+  Future<ApiResponse> saveDeviceToken(String token) async {
+    return await _apiClient.execute(
+        isTokenRequired: true,
+        body: {"token": token},
+        method: Method.post,
+        url: "api/device-tokens/user",
+        onRequestResponse: (response, statusCode) {
+          return ApiResponse(response, statusCode);
+        });
+  }
 }

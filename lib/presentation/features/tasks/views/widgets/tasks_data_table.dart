@@ -4,6 +4,7 @@ import 'package:number_pagination/number_pagination.dart';
 import 'package:projectflow_web/datasource/requests/pagination_request.dart';
 import 'package:projectflow_web/presentation/features/tasks/bloc/task_bloc.dart';
 import 'package:projectflow_web/presentation/features/tasks/views/widgets/task_priority_card.dart';
+import 'package:projectflow_web/presentation/features/tasks/views/widgets/task_status_card.dart';
 import 'package:projectflow_web/presentation/sharedwidgets/image_placeholder.dart';
 import 'package:projectflow_web/presentation/theme/styles.dart';
 
@@ -29,6 +30,7 @@ class _TasksDataTableState extends State<TasksDataTable> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TaskBloc, TaskState>(
+      buildWhen: (previous, current) => current is GetTasksSuccess || current is GetTasksFailure || current is GetTasksLoading,
       builder: (context, state) {
         if (state is GetTasksLoading) {
           return const Center(child: CircularProgressIndicator());
@@ -97,8 +99,8 @@ class _TasksDataTableState extends State<TasksDataTable> {
                       DataCell(TaskPriorityCard(
                         taskPriorityModel: TaskPriorityModel.type(task.priority!),
                       )),
-                      DataCell(TaskPriorityCard(
-                        taskPriorityModel: TaskPriorityModel.type(task.status!),
+                      DataCell(TaskStatusCard(
+                        taskStatusModel: TaskStatusModel.status(task.status!),
                       )),
                       DataCell(Row(
                         children: [
@@ -125,8 +127,10 @@ class _TasksDataTableState extends State<TasksDataTable> {
                 height: 30,
               ),
               NumberPagination(
+                buttonRadius: 180,
+                selectedButtonColor: AppColors.primary500,
                 totalPages: totalPages,
-                currentPage: currentPage,
+                currentPage: currentPage + 1,
                 onPageChanged: (page) {
                   _taskBloc.add(GetTasksEvent(PaginationRequest(page - 1, 4)));
                 },

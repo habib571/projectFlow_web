@@ -22,7 +22,7 @@ class TaskStatusModel {
   final Color backgroundColor;
   final String statusName;
   TaskStatusModel(this.textColor, this.backgroundColor, this.statusName);
-  factory TaskStatusModel.type(String statusName) {
+  factory TaskStatusModel.status(String statusName) {
     switch (statusName) {
       case "To-Do":
         return TaskStatusModel(

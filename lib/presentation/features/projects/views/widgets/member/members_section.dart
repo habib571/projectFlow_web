@@ -34,7 +34,7 @@ class _MembersSectionState extends State<MembersSection> {
   Widget build(BuildContext context) {
     return Card(
       elevation: 1,
-      color: Colors.white,
+      color: AppColors.scaffold ,
       child: Padding(
         padding: const EdgeInsets.all(15),
         child: Column(
@@ -137,7 +137,7 @@ class _MembersSectionState extends State<MembersSection> {
           return MemberListTile(
             isLoading: true,
             name: "" ,
-            joinedAt: "" ,
+            joinedAt: null ,
             role: "",
             imageUrl: "",
             onTap: () {},

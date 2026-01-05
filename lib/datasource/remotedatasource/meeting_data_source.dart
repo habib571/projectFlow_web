@@ -8,6 +8,7 @@ import 'package:projectflow_web/datasource/requests/pagination_request.dart';
 abstract class MeetingDataSource {
   Future<ApiResponse> addMeeting(AddMeetingRequest request, int projectId) ;
   Future<ApiResponse> getMeetings(PaginationRequest pagination, int projectId) ;
+  Future<ApiResponse> endMeeting( int meetingId) ;
 
 }
 
@@ -41,6 +42,17 @@ class MeetingDataSourceImpl implements MeetingDataSource {
     return await _apiClient.execute(
       method: Method.get,
       url: "/meeting/all/$projectId?$queryString",
+      onRequestResponse: (response, statusCode) {
+        return ApiResponse(response, statusCode);
+      },
+    );
+  }
+
+  @override
+  Future<ApiResponse> endMeeting(int meetingId) async {
+    return await _apiClient.execute(
+      method: Method.put,
+      url: "/meeting/end/$meetingId",
       onRequestResponse: (response, statusCode) {
         return ApiResponse(response, statusCode);
       },

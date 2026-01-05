@@ -50,3 +50,22 @@ final class RemoveParticipant extends MeetingEvent {
   @override
   List<Object?> get props => [member];
 }
+
+final class EndMeetingLocalEvent extends MeetingEvent {
+  final int meetingId;
+
+  const EndMeetingLocalEvent(this.meetingId);
+
+  @override
+  List<Object?> get props => [meetingId];
+
+}
+
+final class EndMeetingSyncEvent extends MeetingEvent {
+  final int meetingId;
+
+  const EndMeetingSyncEvent(this.meetingId);
+
+  @override
+  List<Object?> get props => [meetingId];
+}
